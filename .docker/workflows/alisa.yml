@@ -1,6 +1,12 @@
 name: Lint and Test
 
-on: [push] 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   lint-test:
@@ -18,3 +24,4 @@ jobs:
 
       - name: Run Jest
         run: npm test
+
