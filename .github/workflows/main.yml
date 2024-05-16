@@ -1,18 +1,25 @@
-name: Node.js CI
-
-on: [push]
-
+name: CI
+ 
+on:
+  push:
+    branches: [ main  ]
+  pull_request:
+    branches: [ main ]
+ 
 jobs:
-  build:
+  lint_and_test:
     runs-on: ubuntu-latest
+ 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '14.x'
-
-      - run: yarn install
-
-      - run: yarn test
+    - name: Checkout code
+      uses: actions/checkout@v2
+ 
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+ 
+    - name: Install dependencies
+      run: sudo yarn install
+    - name: Run tests
+      run: sudo yarn test
